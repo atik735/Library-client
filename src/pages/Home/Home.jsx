@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import Banner from "./Banner";
 import BookCategories from "./BookCategories";
+import Extra1 from "./Extra1";
 
 // const jobsPromise = fetch("http://localhost:5000/jobs").then(res => res.json())
 
@@ -31,6 +32,8 @@ const Home = () => {
             <HotJobs jobsPromise={jobsPromise}></HotJobs>
             </Suspense> */}
             <BookCategories></BookCategories>
+
+            <Extra1></Extra1>
     </div>
   );
 };

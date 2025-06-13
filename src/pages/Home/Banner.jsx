@@ -4,9 +4,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Link, NavLink } from 'react-router';
-import logo from "../../assets/logo.png"
 import Swal from 'sweetalert2';
-import { Tooltip as ReactTooltip } from "react-tooltip";
 import { AuthContext } from '../../contexts/AuthContext';
 
 const bannerSlides = [
@@ -119,5 +117,4 @@ const Banner = () => {
     </div>
   );
 };
-
 export default Banner;

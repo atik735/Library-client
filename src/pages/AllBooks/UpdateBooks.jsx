@@ -24,7 +24,6 @@ const UpdateBooks = () => {
         console.log(updateBook)
         updateBook.quantity = parseInt(updateBook.quantity);
         updateBook.rating = rating;   
-
     //send updated book to the db
 
         axios.put(`${import.meta.env.VITE_API_URL}/books/${_id}`,updateBook)
