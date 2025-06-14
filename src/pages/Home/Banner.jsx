@@ -90,7 +90,7 @@ const Banner = () => {
   
 
   return (
-    <div className="mb-10 px-4 md:px-8">
+    <div className="mb-10">
       <Swiper
         modules={[Autoplay, Navigation]}
         autoplay={{ delay: 3000 }}

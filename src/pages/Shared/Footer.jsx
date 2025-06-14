@@ -6,6 +6,7 @@ import { FaInstagram } from "react-icons/fa";
 import { TiSocialGooglePlus } from "react-icons/ti";
 import { TiSocialLinkedinCircular } from "react-icons/ti";
 import { AiOutlineYoutube } from "react-icons/ai";
+import { motion } from "motion/react";
 
 
 const Footer = () => {
@@ -42,7 +43,16 @@ const Footer = () => {
     return (
 <footer className="footer footer-horizontal gap-y-0 footer-center bg-slate-200 p-10 space-y-2">
   <aside className='space-y-1'>
-  <img className='w-18' src={logo} alt="" />
+  <motion.img 
+  animate={{
+    scale: [1, 1.05, 1],
+  }}
+  transition={{
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+  className='w-18' src={logo} alt="" />
     <p className="font-bold">
       BOOKNEST.
       </p>

@@ -1,11 +1,20 @@
 import React from 'react';
 import extra1 from '../../assets/extra1.jpg'
+import { motion } from "motion/react";
 const Extra1 = () => {
     return (
         <div className='bg-slate-200 my-8 shadow-md flex items-center justify-evenly p-20'>
 
         <div>
-            <img src={extra1} className='w-96 rounded' alt="Books" />
+            <motion.img 
+            animate ={{y:[25,0,25]}}
+                transition ={{
+                    duration:5,
+                    delay:1,
+                    repeat:Infinity
+                }}
+
+            src={extra1} className='w-96 rounded' alt="Books" />
         </div>
 
         <div className='text-center space-y-16'>

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import logo from "../../assets/logo.png"
 import Swal from 'sweetalert2';
+import { motion } from "motion/react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -74,9 +75,19 @@ const Navbar = () => {
       </ul>
     </div>
     <Link to='/' className='flex items-center'>
+    <motion.span
+              animate={{
+        rotate: [0, -5, 5, -5, 5, 0],  // swinging left ↔ right
+      }}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    className='flex items-center'>
     <img className='w-10 max-md:w-8 max-sm:w-8' src={logo} alt="" />
     <h3 className='font-bold text-xl bg-gradient-to-tr text-transparent bg-clip-text from-green-600 to-lime-300 max-md:text-base'>BookNest</h3> 
-
+</motion.span>
 </Link>
   </div>
   <div className="navbar-center hidden lg:flex">
