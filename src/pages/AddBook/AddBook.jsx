@@ -95,7 +95,7 @@ const AddBook = () => {
 
         <fieldset className='border border-gray-50 p-4 rounded bg-base-200 my-6'>
           <label className='label'>Book Content</label>
-          <textarea name='content' className='textarea w-full' placeholder='More information about the book'></textarea>
+          <textarea name='content' className='textarea w-full' defaultValue={"This book takes readers on a captivating journey through rich storytelling and insightful narratives. It explores deep human emotions, engaging characters, and thought-provoking themes that leave a lasting impact. Perfect for anyone looking to get lost in a world of imagination and learning."} placeholder='More information about the book'></textarea>
         </fieldset>
 
         <input type='submit' className='btn w-full' value='Add Book' />

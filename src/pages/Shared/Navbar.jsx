@@ -77,7 +77,7 @@ const Navbar = () => {
     <Link to='/' className='flex items-center'>
     <motion.span
               animate={{
-        rotate: [0, -5, 5, -5, 5, 0],  // swinging left ↔ right
+        rotate: [0, -5, 5, -5, 5, 0], 
       }}
       transition={{
         duration: 3,
@@ -105,6 +105,12 @@ const Navbar = () => {
           <img src={user.photoURL} alt="User" className="w-full h-full object-cover" />
         </div>
       </div>
+      <ReactTooltip
+    id="my-tooltip-2"
+    place="left"
+    variant="info"
+    content={user.displayName}
+  />
       <ul
         tabIndex={0}
         className="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow z-50"
@@ -115,14 +121,13 @@ const Navbar = () => {
         <li>
           <h4>{user.email}</h4>
         </li>
+        <li>
+<button onClick={handleSignOut} className="btn btn-sm w-full text-white bg-green-600 hover:bg-green-700">
+            Sign Out
+          </button></li>
       </ul>
     </div>
-          <ReactTooltip
-        id="my-tooltip-2"
-        place="left"
-        variant="info"
-        content={user.displayName}
-      />
+
   </>
 ) : (
   <div className="space-x-3">
@@ -134,10 +139,7 @@ const Navbar = () => {
     </Link>
   </div>
 )}
-    {user && <div>
-<button onClick={handleSignOut} className="btn btn-sm w-full text-white bg-green-600 hover:bg-green-700">
-            Sign Out
-          </button></div>}
+    {/* {user && } */}
 </div>
 </div>
     );
