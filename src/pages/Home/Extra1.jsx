@@ -2,7 +2,7 @@ import React from 'react';
 import extra1 from '../../assets/extra1.jpg'
 const Extra1 = () => {
     return (
-        <div className='bg-slate-200 flex items-center justify-evenly p-20'>
+        <div className='bg-slate-200 my-8 shadow-md flex items-center justify-evenly p-20'>
 
         <div>
             <img src={extra1} className='w-96 rounded' alt="Books" />
