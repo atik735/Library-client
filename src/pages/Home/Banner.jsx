@@ -3,9 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Link, NavLink } from 'react-router';
-import Swal from 'sweetalert2';
-import { AuthContext } from '../../contexts/AuthContext';
 
 const bannerSlides = [
 // https://i.ibb.co/Pzsd5Pvf/pepolereading.jpg
@@ -36,58 +33,6 @@ const bannerSlides = [
 ];
 
 const Banner = () => {
-
-  
-        const {user,signOutUser} = useContext(AuthContext)
-    // console.log(user);
-    
-      const handleSignOut =() =>{
-        signOutUser()
-        .then(() =>{
-          console.log("signout succesfull");
-                Swal.fire({
-            title: "Sign Out Successfull!",
-            icon: "success",
-            draggable: true,
-              timer: 1500
-          });
-  
-        })
-        .catch(error =>{
-          console.log(error);
-        })
-      }
-    
-        const links = <>
-    <li><NavLink to='/' className={({ isActive }) =>
-            isActive
-              ? "text-green-600 font-bold"
-              : "text-gray-500"
-          }
-  >Home</NavLink></li>
-    <li><NavLink to='/allbooks' className={({ isActive }) =>
-            isActive
-              ? "text-green-600 font-bold"
-              : "text-gray-500"
-          }
-  >All Books</NavLink></li>
-  
-    <li><NavLink to='/addbook' className={({ isActive }) =>
-            isActive
-              ? "text-green-600 font-bold"
-              : "text-gray-500"
-          }
-  >Add Book</NavLink></li>
-  
-    <li><NavLink to={`/borrowedBooks`} className={({ isActive }) =>
-            isActive
-              ? "text-green-600 font-bold"
-              : "text-gray-500"
-          }
-  >Borrowed Books </NavLink></li>
-  
-  </>
-  
 
   return (
     <div className="mb-10">
