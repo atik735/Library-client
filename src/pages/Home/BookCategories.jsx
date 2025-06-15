@@ -28,6 +28,11 @@ const BookCategories = () => {
     id: 4,
     name: "Sci-Fi",
     image: "https://i.ibb.co/dHZHnVY/7f7d5fb3924d287ec438effb772cbb51.jpg",
+  },
+  {
+    id: 5,
+    name: "Thriller",
+    image: "https://i.ibb.co/20ctzdzG/images.jpg",
   }
 ];
 

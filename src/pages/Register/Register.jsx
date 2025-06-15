@@ -9,7 +9,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../firebase/firebase.init";
 
 const Register = () => {
-  const { createUser , googleSignIn} = useContext(AuthContext);
+  const { setUser,createUser , googleSignIn} = useContext(AuthContext);
   const navigate = useNavigate();
     const location = useLocation()
 
@@ -55,8 +55,9 @@ const Register = () => {
           photoURL: photo,
         };
         updateProfile(auth.currentUser, profile)
-          .then((result) => {
+          .then(() => {
             setSuccess(true);
+                setUser({ ...auth.currentUser });
           })
           .catch((error) => {
             setErrorMessage(error.message);

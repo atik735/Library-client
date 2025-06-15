@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../layouts/Root";
 import PrivateRoute from "../routes/PrivateRoute";
-import BooksDetails from "../pages/BooksDetails/BooksDetails";
 import AllBooks from "../pages/AllBooks/AllBooks";
 import AddBook from "../pages/AddBook/AddBook";
 import Home from "../pages/Home/Home";
@@ -12,6 +11,7 @@ import ErrorPage from "../pages/Shared/ErrorPage";
 import axios from "axios";
 import UpdateBooks from "../pages/AllBooks/UpdateBooks";
 import CategoriesBooks from "../pages/Home/CategoriesBooks";
+import BooksDetails from "../pages/Details&Brow/BooksDetails";
 
 const router = createBrowserRouter([
   {
@@ -24,19 +24,6 @@ const router = createBrowserRouter([
         Component: Home,
       },
 
-{
-  path: "/books/:id",
-  loader: ({ params }) =>
-    axios(`${import.meta.env.VITE_API_URL}/books/${params.id}`),
-  hydrateFallbackElement: (
-    <span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>
-  ),
-  element: (
-    <PrivateRoute>
-      <BooksDetails></BooksDetails>
-    </PrivateRoute>
-  ),
-},
  {
         path: "allbooks",
         loader: () => axios(`${import.meta.env.VITE_API_URL}/books`),
@@ -57,6 +44,19 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+  path: "/details/:id",
+  loader: ({ params }) =>
+    axios(`${import.meta.env.VITE_API_URL}/books/${params.id}`),
+  hydrateFallbackElement: (
+    <span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>
+  ),
+  element: (
+    <PrivateRoute>
+      <BooksDetails></BooksDetails>
+    </PrivateRoute>
+  ),
+},
       {
         path: "addbook",
         element: (
@@ -79,9 +79,7 @@ const router = createBrowserRouter([
         
         hydrateFallbackElement:(<span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>),
         element: (
-          <PrivateRoute>
             <CategoriesBooks></CategoriesBooks>
-          </PrivateRoute>
         ),
       },
       {
