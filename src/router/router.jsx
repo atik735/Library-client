@@ -11,6 +11,7 @@ import BorrowedBooks from "../pages/BorrowedBooks/BorrowedBooks";
 import ErrorPage from "../pages/Shared/ErrorPage";
 import axios from "axios";
 import UpdateBooks from "../pages/AllBooks/UpdateBooks";
+import CategoriesBooks from "../pages/Home/CategoriesBooks";
 
 const router = createBrowserRouter([
   {
@@ -23,21 +24,20 @@ const router = createBrowserRouter([
         Component: Home,
       },
 
-      {
-        path: "/books/:id",
-
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/jobs/${params.id}`),
-
-        loader: () => axios(`${import.meta.env.VITE_API_URL}/books`),
-        hydrateFallbackElement:(<span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>),
-        element: (
-          <PrivateRoute>
-            <BooksDetails></BooksDetails>
-          </PrivateRoute>
-        ),
-      },
-      {
+{
+  path: "/books/:id",
+  loader: ({ params }) =>
+    axios(`${import.meta.env.VITE_API_URL}/books/${params.id}`),
+  hydrateFallbackElement: (
+    <span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>
+  ),
+  element: (
+    <PrivateRoute>
+      <BooksDetails></BooksDetails>
+    </PrivateRoute>
+  ),
+},
+ {
         path: "allbooks",
         loader: () => axios(`${import.meta.env.VITE_API_URL}/books`),
         hydrateFallbackElement:(<span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>),
@@ -70,6 +70,17 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <BorrowedBooks></BorrowedBooks>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "category/:categoryName",
+        loader: ({params}) => axios(`${import.meta.env.VITE_API_URL}/books/category/${params.categoryName}`),
+        
+        hydrateFallbackElement:(<span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>),
+        element: (
+          <PrivateRoute>
+            <CategoriesBooks></CategoriesBooks>
           </PrivateRoute>
         ),
       },

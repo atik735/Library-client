@@ -15,21 +15,16 @@ const BookCategories = () => {
   },
   {
     id: 2,
-    name: "Science",
-    image: "https://i.ibb.co/YFx6gpN9/9958ab6040661bbb446bd6a4c40c8408.jpg",
-  },
-  {
-    id: 3,
     name: "History",
     image: "https://i.ibb.co/Fk41q1Dd/best-history-books-2016jpg-800x600-q85-crop.jpg",
   },
   {
-    id: 4,
+    id: 3,
     name: "Drama",
     image: "https://i.ibb.co/b5Xs5hNf/images.jpg",
   },
   {
-    id: 5,
+    id: 4,
     name: "Sci-Fi",
     image: "https://i.ibb.co/dHZHnVY/7f7d5fb3924d287ec438effb772cbb51.jpg",
   }
