@@ -4,6 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import {Autoplay,Navigation } from 'swiper/modules';
 import { Link } from 'react-router';
+import { motion } from "motion/react";
 
 const BookCategories = () => {
 
@@ -32,9 +33,9 @@ const BookCategories = () => {
 
 
     return (
-    <div className="bg-blue-100 py-10 px-4 rounded-xl">
-      <h2 className="text-3xl font-bold text-center mb-10 border-b-2 border-blue-500  px-4 place-self-center">
-        Top Categories Book
+    <div className="bg-green-100 py-10 px-4 rounded-xl">
+      <h2 className="text-3xl font-bold text-center mb-10 border-b-2 border-green-500  px-4 place-self-center">
+        Book Categories
       </h2>
 
       <Swiper
@@ -53,12 +54,21 @@ const BookCategories = () => {
       >
         {categoriesData.map((category) => (
 <SwiperSlide key={category.id} className="flex flex-col items-center ">
-  <div className=' place-self-center group transition-all duration-300'>
+  <motion.div 
+  animate={{
+    scale: [1, 1.05, 1],
+    x:[20,0,20]
+  }}
+  transition={{
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }} className=' place-self-center group transition-all duration-300'>
     <Link to={`/category/${category.name.toLowerCase()}`}>
       <img src={category.image} className='w-44 rounded-full h-44 p-1 border-2 border-dashed border-green-600 transition-transform duration-300 group-hover:scale-105' alt="" />
       <p className='text-center font-bold text-lg mt-2 transition-transform duration-300'>{category.name}</p>
     </Link>
-  </div>
+  </motion.div>
 </SwiperSlide>
 
         ))}
