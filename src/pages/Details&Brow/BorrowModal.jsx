@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
-const BorrowModal = ({book,user,onClose}) => {
+const BorrowModal = ({book,user,onClose,handleQuantityUpdate}) => {
     const [returnDate,setReturnDate] = useState("")
 
     const handleBorrow =(e) =>{
         e.preventDefault();
-
+        
      if (book.quantity <= 0) {
       toast.error('This book is currently out of stock!');
       return;
@@ -15,21 +16,31 @@ const BorrowModal = ({book,user,onClose}) => {
       toast.error('nijer Book nije order deoa jabena')
       return;
     }
-    
-    
 
     const borrowData ={
         bookId: book._id,
-        name: user.displayName,
         email: user.email,
         returnDate,
-        borrowedDate: new Date().toISOString(),
-        image: book.image,
-        title: book.name,
-        category: book.category
+        borrowedDate: new Date().toISOString().split('T')[0],
     }
 
+    axios.post(`${import.meta.env.VITE_API_URL}/borrow-book/${book._id}`,borrowData)
+  .then((res) => {
+    console.log(res.data);
+
+    if (res.data?.acknowledged) {
+      toast.success('Book borrowed successfully!');
+     handleQuantityUpdate()
+      onClose();
+    } else {
+      toast.error('Failed to borrow the book!');
     }
+  })
+  .catch((err) => {
+    console.error(err);
+    toast.error('Something went wrong!');
+  });
+}
     return (
         <div>
         <form onSubmit={handleBorrow} className='text-left w-3/4 place-self-center space-y-4'>
@@ -37,16 +48,18 @@ const BorrowModal = ({book,user,onClose}) => {
 
 <div>
   <label className="label">Name</label>
-  <input type="text" className="input w-full" placeholder="Name" defaultValue={user.displayName} />
+  <input type="text" className="input w-full" readOnly placeholder="Name" defaultValue={user.displayName} />
 </div>
 <div>
   <label className="label">Email</label>
-  <input type="text" className="input w-full" placeholder="Email" defaultValue={user.email}/>
+  <input type="text" className="input w-full" readOnly placeholder="Email" defaultValue={user.email}/>
 </div>
 
 <div>
   <label className="label">Return Date</label>
-  <input type="date" required onChange={(e) => setReturnDate(e.target.value)} className="input w-full"  value={returnDate} 
+  <input type="date"
+    min={new Date().toISOString().split('T')[0]}
+  required onChange={(e) => setReturnDate(e.target.value)} className="input w-full"  value={returnDate} 
   />
   </div>
    <button type="submit" className="btn w-full text-white bg-green-600 hover:bg-green-700">

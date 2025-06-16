@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData,Link } from 'react-router';
 import { Rating,ThinStar  } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
@@ -7,20 +7,29 @@ import BorrowModal from './BorrowModal';
 const BooksDetails = () => {
     const {data:book} =useLoaderData()
     const {user} = useContext(AuthContext)
+    const [bookData,setBookData] = useState(book)
     const myStyles = {
   itemShapes: ThinStar,
   activeFillColor: '#ffb700',
   inactiveFillColor: '#fbf1a9'
 }
-    const {name,author,category,content,description,email,image,quantity,rating} =book
-    return (
+    const {name,author,category,content,description,email,image,quantity,rating} =bookData
+  
+    const handleQuantityUpdate = () =>{
+      setBookData(prev =>({
+        ...prev, quantity: prev.quantity -1 
+      }))
+    }
+
+
+  return (
 <div className="max-w-6xl mx-auto p-6 shadow-md bg-green-100 rounded-xl">
 
 
     <div className='flex flex-col lg:flex-row gap-6 items-start'>
 
         <figure className='flex-shrink-0'>
-        <img src={image} className='w-64 h-96 object-cover rounded-lg' alt="" />
+        <img src={image} className='w-72 h-110 object-cover rounded-lg' alt="" />
         </figure>
 
         <div className='flex-1 space-y-3'>
@@ -63,7 +72,7 @@ const BooksDetails = () => {
 
     <dialog id="my_modal_4" className="modal">
   <div className="modal-box w-11/12 max-w-5xl">
-        <BorrowModal book={book} user={user} onClose = {() => document.getElementById('my_modal_4').close()}></BorrowModal>
+        <BorrowModal book={bookData} handleQuantityUpdate={handleQuantityUpdate} user={user} onClose = {() => document.getElementById('my_modal_4').close()}></BorrowModal>
     <div className="modal-action">
       <form method="dialog">
         {/* if there is a button, it will close the modal */}
