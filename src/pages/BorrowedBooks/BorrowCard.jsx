@@ -9,7 +9,7 @@ const BorrowCard = ({borrow,handleReturn}) => {
       activeFillColor: '#ffb700',
       inactiveFillColor: '#fbf1a9'
     }
-    console.log(borrow)
+    // console.log(borrow)
     const {borrowedDate,category,image,returnDate,name,bookId,author,rating,quantity,_id} = borrow
     return (
   <div className="bg-base-200 rounded-lg shadow-sm  p-4 w-full max-w-xs mx-auto">

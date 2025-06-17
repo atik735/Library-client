@@ -1,22 +1,32 @@
-import { Rating, ThinStar } from '@smastrom/react-rating';
-import axios from 'axios';
-import React, { useState, useContext } from 'react';
-import { useLoaderData, useNavigate } from 'react-router';
-import Swal from 'sweetalert2';
-import { AuthContext } from '../../contexts/AuthContext'; // Make sure this is correct
+import { Rating, ThinStar } from "@smastrom/react-rating";
+import axios from "axios";
+import React, { useState, useContext } from "react";
+import { useLoaderData, useNavigate } from "react-router";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../contexts/AuthContext"; // Make sure this is correct
 
 const myStyles = {
   itemShapes: ThinStar,
-  activeFillColor: '#ffb700',
-  inactiveFillColor: '#fbf1a9',
+  activeFillColor: "#ffb700",
+  inactiveFillColor: "#fbf1a9",
 };
 
 const UpdateBooks = () => {
   const { data: book } = useLoaderData();
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext); 
+  const { user } = useContext(AuthContext);
 
-  const { _id, name, author, quantity, category, description, image, content, email } = book;
+  const {
+    _id,
+    name,
+    author,
+    quantity,
+    category,
+    description,
+    image,
+    content,
+    email,
+  } = book;
   const [rating, setRating] = useState(book.rating || 0);
 
   const handleUpdateBook = async (e) => {
@@ -28,36 +38,37 @@ const UpdateBooks = () => {
     updateBook.rating = rating;
 
     try {
-      const token = await user.getIdToken(); 
-      console.log("JWT Token:", token); 
-      axios.put(`${import.meta.env.VITE_API_URL}/books/${_id}`, updateBook, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      const token = await user.getIdToken();
+      // console.log("JWT Token:", token);
+      axios
+        .put(`${import.meta.env.VITE_API_URL}/books/${_id}`, updateBook, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((data) => {
-          console.log(data);
+          data;
           Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate('/allbooks');
+          navigate("/allbooks");
         });
     } catch (err) {
-      console.error('JWT Token Error:', err);
+      console.error("JWT Token Error:", err);
     }
   };
-  
 
   return (
     <div className="px-24 py-10 pb-24">
       <div className="p-12 text-center space-y-4">
         <h1 className="text-6xl">Update Book</h1>
         <p>
-          Fill out the form to Update book to the library. This page is only accessible to authorized users.
+          Fill out the form to Update book to the library. This page is only
+          accessible to authorized users.
         </p>
       </div>
 
@@ -65,22 +76,48 @@ const UpdateBooks = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <fieldset className="border border-gray-50 p-4 rounded bg-base-200">
             <label className="label">Name</label>
-            <input type="text" name="name" defaultValue={name} className="input w-full" placeholder="Book Name" required />
+            <input
+              type="text"
+              name="name"
+              defaultValue={name}
+              className="input w-full"
+              placeholder="Book Name"
+              required
+            />
           </fieldset>
 
           <fieldset className="border border-gray-50 p-4 rounded bg-base-200">
             <label className="label">Quantity</label>
-            <input type="number" name="quantity" defaultValue={quantity} className="input w-full" placeholder="Number of Copies" required />
+            <input
+              type="number"
+              name="quantity"
+              defaultValue={quantity}
+              className="input w-full"
+              placeholder="Number of Copies"
+              required
+            />
           </fieldset>
 
           <fieldset className="border border-gray-50 p-4 rounded bg-base-200">
             <label className="label">Author Name</label>
-            <input type="text" name="author" defaultValue={author} className="input w-full" placeholder="Author Name" required />
+            <input
+              type="text"
+              name="author"
+              defaultValue={author}
+              className="input w-full"
+              placeholder="Author Name"
+              required
+            />
           </fieldset>
 
           <fieldset className="border border-gray-50 p-4 rounded bg-base-200">
             <label className="label">Category</label>
-            <select name="category" defaultValue={category} className="select w-full" required>
+            <select
+              name="category"
+              defaultValue={category}
+              className="select w-full"
+              required
+            >
               <option value="">Select Category</option>
               <option value="Novel">Novel</option>
               <option value="Thriller">Thriller</option>
@@ -119,12 +156,24 @@ const UpdateBooks = () => {
 
         <fieldset className="border border-gray-50 p-4 rounded bg-base-200 my-6">
           <label className="label">Image URL</label>
-          <input type="text" defaultValue={image} name="image" className="input w-full" placeholder="Book cover image URL" required />
+          <input
+            type="text"
+            defaultValue={image}
+            name="image"
+            className="input w-full"
+            placeholder="Book cover image URL"
+            required
+          />
         </fieldset>
 
         <fieldset className="border border-gray-50 p-4 rounded bg-base-200 my-6">
           <label className="label">Book Content</label>
-          <textarea name="content" defaultValue={content} className="textarea w-full" placeholder="More information about the book"></textarea>
+          <textarea
+            name="content"
+            defaultValue={content}
+            className="textarea w-full"
+            placeholder="More information about the book"
+          ></textarea>
         </fieldset>
 
         <input type="submit" className="btn w-full" value="Update Book" />

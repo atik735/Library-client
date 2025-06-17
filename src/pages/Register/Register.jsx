@@ -25,7 +25,7 @@ const Register = () => {
     const password = e.target.password.value;
     const name = e.target.name.value;
     const photo = e.target.photo.value;
-    console.log(email, password, name);
+    // console.log(email, password, name);
 
     setErrorMessage("");
     setSuccess(false);
@@ -42,7 +42,7 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         Swal.fire({
           title: "User create Successfull!",
           icon: "success",
@@ -64,7 +64,7 @@ const Register = () => {
           });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setErrorMessage(error.message);
       });
   };
@@ -72,7 +72,7 @@ const Register = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
 
         navigate(location?.state || "/");
       })

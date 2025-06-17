@@ -14,12 +14,12 @@ const BorrowedBooks = () => {
     useEffect(() =>{
         axios(`${import.meta.env.VITE_API_URL}/borrow-lists/${user?.email}`)
         .then(data =>{
-            console.log(data?.data)
+            // console.log(data?.data)
             setBorrows(data?.data)
             setLoading(false);
         })
         .catch(err =>{
-            console.log(err)
+            // console.log(err)
               setLoading(false);
         })
     },[user])
