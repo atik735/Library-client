@@ -20,10 +20,11 @@ const handleBorrow = async (e) => {
 
   const borrowData = {
     bookId: book._id,
-    email: user.email,
+    email: user?.email,
     returnDate,
     borrowedDate: new Date().toISOString().split('T')[0],
   };
+  
 
   const token = await user.getIdToken();
 
