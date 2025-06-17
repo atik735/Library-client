@@ -24,7 +24,9 @@ const handleBorrow = async (e) => {
     returnDate,
     borrowedDate: new Date().toISOString().split('T')[0],
   };
-  
+  // console.log("Logged In Email:", user.email);
+// console.log("Book Owner Email:", book.email);
+
 
   const token = await user.getIdToken();
 
