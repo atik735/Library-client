@@ -3,13 +3,14 @@ import { Rating,ThinStar  } from '@smastrom/react-rating'
 import { IoPerson } from "react-icons/io5";
 import '@smastrom/react-rating/style.css'
 
-const BorrowCard = ({borrow,onCancel}) => {
+const BorrowCard = ({borrow,handleReturn}) => {
     const myStyles = {
       itemShapes: ThinStar,
       activeFillColor: '#ffb700',
       inactiveFillColor: '#fbf1a9'
     }
-    const {borrowedDate,category,image,returnDate,name,bookId,author,rating,quantity} = borrow
+    console.log(borrow)
+    const {borrowedDate,category,image,returnDate,name,bookId,author,rating,quantity,_id} = borrow
     return (
   <div className="bg-base-200 rounded-lg shadow-sm  p-4 w-full max-w-xs mx-auto">
       <figure className="relative  px-4">
@@ -48,7 +49,7 @@ const BorrowCard = ({borrow,onCancel}) => {
         <p>Quantity: {quantity}</p>
         <p>Borrowed Date: {borrowedDate}</p>
         <p>Return Date: {returnDate}</p>
-        <button className="btn btn-sm mt-2 w-full text-white bg-green-600 hover:bg-green-700 font-medium">
+        <button onClick={() =>handleReturn(_id,bookId)} className="btn btn-sm mt-2 w-full text-white bg-green-600 hover:bg-green-700 font-medium">
           Return Book
         </button>        
       </div>
