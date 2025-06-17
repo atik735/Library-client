@@ -64,6 +64,7 @@ const UpdateBooks = () => {
 
   return (
     <div className="px-24 py-10 pb-24">
+      <title>BookNest||UpdateBook</title>
       <div className="p-12 text-center space-y-4">
         <h1 className="text-6xl">Update Book</h1>
         <p>
