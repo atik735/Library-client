@@ -9,9 +9,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../firebase/firebase.init";
 
 const Register = () => {
-  const { setUser,createUser , googleSignIn} = useContext(AuthContext);
+  const { setUser, createUser, googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
-    const location = useLocation()
+  const location = useLocation();
 
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
@@ -57,7 +57,7 @@ const Register = () => {
         updateProfile(auth.currentUser, profile)
           .then(() => {
             setSuccess(true);
-                setUser({ ...auth.currentUser });
+            setUser({ ...auth.currentUser });
           })
           .catch((error) => {
             setErrorMessage(error.message);
@@ -68,33 +68,31 @@ const Register = () => {
         setErrorMessage(error.message);
       });
   };
-  
-    const handleGoogleSignIn =() =>{
-      googleSignIn()
-      .then((result) =>{
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
         console.log(result.user);
-        
-        navigate(location?.state || '/')
 
-
+        navigate(location?.state || "/");
       })
-      .catch(error =>{
+      .catch((error) => {
         setErrorMessage(error.message);
-      })
-  }
+      });
+  };
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+<div className="hero bg-base-200 min-h-screen py-6 px-2">
+  <div className="hero-content flex-col lg:flex-row-reverse max-w-6xl mx-auto">
         <div className="text-center lg:text-left">
           <Lottie
-            className="w-[400px]"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
             animationData={register}
             loop={true}
           ></Lottie>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto">
           <div className="card-body">
-            <h1 className="text-5xl font-bold">Register now!</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Register now!</h1>
             <form onSubmit={handleSignUp} className="space-y-5">
               <div className="space-y-2">
                 <div>
@@ -105,7 +103,7 @@ const Register = () => {
                     id="name"
                     required
                     placeholder="Name"
-                    className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
+                    className="w-full px-2 sm:px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                   />
                 </div>
                 <div>
@@ -116,7 +114,7 @@ const Register = () => {
                     id="photo"
                     required
                     placeholder="Photo URL"
-                    className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
+                    className="w-full px-2 sm:px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                   />
                 </div>
                 <div>
@@ -129,7 +127,7 @@ const Register = () => {
                     id="email"
                     required
                     placeholder="leroy@jenkins.com"
-                    className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
+                    className="w-full px-2 sm:px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                   />
                 </div>
                 <div>
@@ -145,7 +143,7 @@ const Register = () => {
                       id="password"
                       placeholder="*****"
                       required
-                      className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
+                      className="w-full px-2 sm:px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                     />
                     <button
                       onClick={() => setShowPassword(!showPassword)}

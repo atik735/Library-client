@@ -82,18 +82,18 @@ const SignIn = () => {
       })
   }
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+<div className="hero bg-base-200 min-h-screen py-6 px-2">
+<div className="hero-content flex-col lg:flex-row-reverse max-w-6xl mx-auto">
         <div className="text-center lg:text-left">
           <Lottie
-            className="w-[400px]"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg" 
             animationData={signin}
             loop={true}
           ></Lottie>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto">
           <div className="card-body">
-            <h1 className="text-4xl font-bold mb-2">SignIn now!</h1>
+<h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">Sign in now!</h1>
             <form onSubmit={handleSignIn} className="space-y-4">
               <div className="space-y-2">
                 <div>

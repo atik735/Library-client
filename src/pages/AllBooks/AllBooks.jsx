@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import AllBooksCard from './AllBooksCard';
-import { FaList } from "react-icons/fa6";
-import { IoGrid } from "react-icons/io5";
 import AllBooksTable from './AllBooksTable';
 import booksimg from '../../assets/books.png';
 const AllBooks = () => {
     const {data:books} = useLoaderData()
-  const [toggleView, setToggleView] = useState(() => {
-    const saved = localStorage.getItem('toggleView');
-    return saved ? JSON.parse(saved) : true;
+    const [filterOption, setFilterOption] = useState("all");
+  const [viewMode, setViewMode] = useState(() => {
+    const saved = localStorage.getItem('viewMode');
+    return saved ? saved : "card"; // default to card
   });
-const handleToggle = () => {
-  setToggleView(prev => {
-    localStorage.setItem('toggleView', JSON.stringify(!prev));
-    return !prev;
-  });
-};
+
+  const handleViewChange = (e) => {
+    const selected = e.target.value;
+    setViewMode(selected);
+    localStorage.setItem('viewMode', selected); // save in localStorage
+  };
+
+const filteredBooks = filterOption === "available"
+  ? books.filter(book => book.quantity > 0)
+  : books;
+
     return (
-        <div>
+        <div className='mb-5'>
+          <title>BookNest || AllBooks</title>
       <div className="px-6 md:px-12 py-8">
   <div className="text-center mb-8">
     <h1 className="text-4xl font-bold text-green-600 mb-2 flex items-center justify-center"><img src={booksimg} className='w-12' alt="" /> All Books</h1>
@@ -30,11 +35,13 @@ const handleToggle = () => {
   {/* Optional: Filter Bar */}
   <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
     <div className="flex gap-3 w-full md:w-auto">
-<select className="select select-bordered" defaultValue="">
-  <option value="" disabled>Category</option>
-  <option value="Drama">Drama</option>
-  <option value="Thriller">Thriller</option>
-  <option value="Sci-Fi">Sci-Fi</option>
+<select
+  className="border-2 border-green-500 bg-white text-green-700 font-semibold px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-200"
+  value={filterOption}
+  onChange={(e) => setFilterOption(e.target.value)}
+>
+  <option value="all">All Books</option>
+  <option value="available">Available Books</option>
 </select>
 
 
@@ -45,22 +52,28 @@ const handleToggle = () => {
       />
     </div>
 
-    <div className="flex gap-2">
-        <div className="trigger-button" onClick={handleToggle}> 
-            {toggleView?<div className='cursor-pointer'><FaList size={30}/></div>:<div className='cursor-pointer'><IoGrid size={30}/></div>}
+      {/* 🔄 changed: view toggle from button to dropdown */}
+          <div className="flex gap-2">
+      <select
+        className="border-2 border-green-500 bg-white text-green-700 font-semibold px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-200"
+        value={viewMode}
+        onChange={handleViewChange}
+      >
+        <option value="card">📇 Card View</option>
+       <option value="list">📋 Table View</option>
+      </select>
+          </div>
         </div>
-    </div>
-  </div>
-</div>
+      </div>
 
 
 
-        {toggleView?<div className='grid lg:grid-cols-4  gap-4 md:grid-cols-2 grid-cols-1'>
+         {viewMode === "card" ? <div className='grid lg:grid-cols-4  gap-4 md:grid-cols-2 grid-cols-1'>
             {
-                books.map(book => <AllBooksCard key={book._id} book={book}></AllBooksCard>)
+                filteredBooks.map(book => <AllBooksCard key={book._id} book={book}></AllBooksCard>)
             }
 
-        </div> :<div className="overflow-x-auto">
+        </div> : <div className="overflow-x-auto">
   <table className="table">
     {/* head */}
     <thead>
@@ -79,7 +92,7 @@ const handleToggle = () => {
     </thead>
     <tbody>
             {
-                books.map((book,index) => <AllBooksTable index={index} key={book._id} book={book}></AllBooksTable>)
+                filteredBooks.map((book,index) => <AllBooksTable index={index} key={book._id} book={book}></AllBooksTable>)
             }
     </tbody>
   </table>

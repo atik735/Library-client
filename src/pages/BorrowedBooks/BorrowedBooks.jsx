@@ -9,19 +9,22 @@ import Swal from 'sweetalert2';
 
 const BorrowedBooks = () => {
     const [borrows,setBorrows] = useState([])
+    const [loading, setLoading] = useState(true);
     const {user} = useContext(AuthContext)
     useEffect(() =>{
         axios(`${import.meta.env.VITE_API_URL}/borrow-lists/${user?.email}`)
         .then(data =>{
             console.log(data?.data)
             setBorrows(data?.data)
+            setLoading(false);
         })
         .catch(err =>{
             console.log(err)
+              setLoading(false);
         })
     },[user])
 
- const handleReturn = (_id, bookId) => {
+const handleReturn = (_id, bookId) => {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -32,27 +35,54 @@ const BorrowedBooks = () => {
     confirmButtonText: "Yes, Return!"
   }).then((result) => {
     if (result.isConfirmed) {
-        axios.delete(`${import.meta.env.VITE_API_URL}/return-book/${_id}?id=${bookId}`)
-        .then(data => {
-            setBorrows((prev) => prev.filter((borrow) => borrow._id !== _id));
+      user.getIdToken()
+        .then(token => {
+          return axios.delete(`${import.meta.env.VITE_API_URL}/return-book/${_id}?id=${bookId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        })
+        .then(() => {
+          setBorrows(prev => prev.filter(borrow => borrow._id !== _id));
           Swal.fire({
-            title: "Return!",
+            title: "Returned!",
             text: "Your Book has been Returned.",
-            icon: "success"
+            icon: "success",
+          });
+        })
+        .catch(err => {
+          console.error("Error while returning:", err);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
           });
         });
     }
   });
 };
+
+
     return (
         <div className='mb-5'>
-     <div className='grid lg:grid-cols-4  gap-4 md:grid-cols-2 grid-cols-1'>
-
-            {
-                borrows.map(borrow => <BorrowCard key={borrow._id} borrow={borrow} handleReturn={handleReturn}></BorrowCard>)
-            }
+            <title>BookNest||BorrowedBooks</title>
+      {loading ? (
+        <div className="text-center text-green-500 text-2xl p-5 mt-10">
+<span className="loading loading-bars loading-xl"></span>
         </div>
+      ) : borrows.length === 0 ? (
+        <div className="text-center text-green-500 text-3xl bg-green-50 p-5 font-bold mt-10">
+          You haven't borrowed any books yet.
         </div>
+      ) : (
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          {borrows.map(borrow => (
+            <BorrowCard key={borrow._id} borrow={borrow} handleReturn={handleReturn}></BorrowCard>
+          ))}
+        </div>
+      )}
+    </div>
     );
 };
 

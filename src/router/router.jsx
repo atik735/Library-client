@@ -27,7 +27,9 @@ const router = createBrowserRouter([
  {
         path: "allbooks",
         loader: () => axios(`${import.meta.env.VITE_API_URL}/books`),
-        hydrateFallbackElement:(<span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>),
+        hydrateFallbackElement:(        <div className="text-center text-green-500 text-2xl p-5 mt-10">
+<span className="loading loading-bars loading-xl"></span>
+        </div>),
         element: (
           <PrivateRoute>
             <AllBooks></AllBooks>
@@ -37,7 +39,9 @@ const router = createBrowserRouter([
         {
         path: "updateBook/:id",
         loader: ({params}) => axios(`${import.meta.env.VITE_API_URL}/books/${params.id}`),
-        hydrateFallbackElement:(<span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>),
+        hydrateFallbackElement:(        <div className="text-center text-green-500 text-2xl p-5 mt-10">
+<span className="loading loading-bars loading-xl"></span>
+        </div>),
         element: (
           <PrivateRoute>
             <UpdateBooks></UpdateBooks>
@@ -49,7 +53,9 @@ const router = createBrowserRouter([
   loader: ({ params }) =>
     axios(`${import.meta.env.VITE_API_URL}/books/${params.id}`),
   hydrateFallbackElement: (
-    <span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>
+            <div className="text-center text-green-500 text-2xl p-5 mt-10">
+<span className="loading loading-bars loading-xl"></span>
+        </div>
   ),
   element: (
     <PrivateRoute>
@@ -77,7 +83,9 @@ const router = createBrowserRouter([
         path: "category/:categoryName",
         loader: ({params}) => axios(`${import.meta.env.VITE_API_URL}/books/category/${params.categoryName}`),
         
-        hydrateFallbackElement:(<span className="loading flex justify-center loading-spinner place-self-center loading-xl"></span>),
+        hydrateFallbackElement:(<div className="text-center text-green-500 text-2xl p-5 mt-10">
+<span className="loading loading-bars loading-xl"></span>
+        </div>),
         element: (
             <CategoriesBooks></CategoriesBooks>
         ),

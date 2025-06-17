@@ -23,8 +23,9 @@ const BooksDetails = () => {
 
 
   return (
-<div className="max-w-6xl mx-auto p-6 shadow-md bg-green-100 rounded-xl">
+<div className="max-w-6xl mx-auto p-6 shadow-md mb-5 bg-green-100 rounded-xl">
 
+    <title>BookNest||Details</title>
 
     <div className='flex flex-col lg:flex-row gap-6 items-start'>
 

@@ -86,7 +86,7 @@ const Navbar = () => {
       }}
     className='flex items-center'>
     <img className='w-10 max-md:w-8 max-sm:w-8' src={logo} alt="" />
-    <h3 className='font-bold text-xl bg-gradient-to-tr text-transparent bg-clip-text from-green-600 to-lime-300 max-md:text-base'>BookNest</h3> 
+    <h3 className='font-bold text-lg sm:text-xl bg-gradient-to-tr text-transparent bg-clip-text from-green-600 to-lime-300'>BookNest</h3> 
 </motion.span>
 </Link>
   </div>
@@ -111,10 +111,11 @@ const Navbar = () => {
     variant="info"
     content={user.displayName}
   />
-      <ul
-        tabIndex={0}
-        className="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow z-50"
-      >
+<ul
+  tabIndex={0}
+  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-center"
+>
+
         <li>
           <h4>{user.displayName}</h4>
         </li>

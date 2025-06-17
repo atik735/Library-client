@@ -5,42 +5,51 @@ import axios from 'axios';
 const BorrowModal = ({book,user,onClose,handleQuantityUpdate}) => {
     const [returnDate,setReturnDate] = useState("")
 
-    const handleBorrow =(e) =>{
-        e.preventDefault();
-        
-     if (book.quantity <= 0) {
-      toast.error('This book is currently out of stock!');
-      return;
-    }
-        if (user?.email === book.email) {
-      toast.error('nijer Book nije order deoa jabena')
-      return;
-    }
+const handleBorrow = async (e) => {
+  e.preventDefault();
 
-    const borrowData ={
-        bookId: book._id,
-        email: user.email,
-        returnDate,
-        borrowedDate: new Date().toISOString().split('T')[0],
-    }
+  if (book.quantity <= 0) {
+    toast.error('This book is currently out of stock!');
+    return;
+  }
 
-    axios.post(`${import.meta.env.VITE_API_URL}/borrow-book/${book._id}`,borrowData)
-  .then((res) => {
-    console.log(res.data);
+  if (user?.email === book.email) {
+    toast.error('You cannot borrow your own book');
+    return;
+  }
 
-    if (res.data?.acknowledged) {
-      toast.success('Book borrowed successfully!');
-     handleQuantityUpdate()
-      onClose();
-    } else {
-      toast.error('Failed to borrow the book!');
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-    toast.error('Something went wrong!');
-  });
-}
+  const borrowData = {
+    bookId: book._id,
+    email: user.email,
+    returnDate,
+    borrowedDate: new Date().toISOString().split('T')[0],
+  };
+
+  const token = await user.getIdToken();
+
+  axios
+    .post(`${import.meta.env.VITE_API_URL}/borrow-book/${book._id}`, borrowData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      if (res.data?.acknowledged) {
+        toast.success('Book borrowed successfully!');
+        handleQuantityUpdate();
+        onClose();
+      } else {
+        toast.error(res.data?.message || 'Failed to borrow the book!');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      const msg = err.response?.data?.message || 'Something went wrong!';
+      toast.error(msg);
+    });
+};
+
+
     return (
         <div>
         <form onSubmit={handleBorrow} className='text-left w-3/4 place-self-center space-y-4'>
