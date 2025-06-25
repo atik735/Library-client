@@ -54,3 +54,15 @@ The purpose of this project is to build a complete **full-stack library manageme
 | `tailwindcss`             | Utility-first CSS framework for modern responsive design  |
 
 ---
+## 🛠️ How to Run Locally
+
+Follow these steps to run the project on your local machine:
+
+### 📦 Clone the Repository
+
+```bash
+git clone https://github.com/atik735/library-management-client.git
+
+cd library-management-server
+npm install
+npm run start
