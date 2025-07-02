@@ -32,9 +32,7 @@ const router = createBrowserRouter([
 <span className="loading loading-bars loading-xl"></span>
         </div>),
         element: (
-          <PrivateRoute>
             <AllBooks></AllBooks>
-          </PrivateRoute>
         ),
       },
         {
