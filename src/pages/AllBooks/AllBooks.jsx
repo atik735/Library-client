@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import AllBooksCard from './AllBooksCard';
 import AllBooksTable from './AllBooksTable';
 import booksimg from '../../assets/books.png';
+import axios from 'axios';
 const AllBooks = () => {
-    const {data:books} = useLoaderData()
+    const [books, setBooks] = useState([]);
     const [filterOption, setFilterOption] = useState("all");
+    const [sortOption,setSortOption] = useState("");
   const [viewMode, setViewMode] = useState(() => {
     const saved = localStorage.getItem('viewMode');
     return saved ? saved : "card"; // default to card
   });
+
+      useEffect(() =>{
+        axios(`${import.meta.env.VITE_API_URL}/books`,{
+          params: {
+            filter : filterOption,
+            sort: sortOption
+          }
+        })
+        .then( res => {
+          setBooks(res.data);
+        })
+        .catch(err =>{
+          console.log("Fetch failed:",err);
+        })
+      },[filterOption,sortOption])
 
   const handleViewChange = (e) => {
     const selected = e.target.value;
@@ -44,12 +61,17 @@ const filteredBooks = filterOption === "available"
   <option value="available">Available Books</option>
 </select>
 
+      <select 
+      value={sortOption}
+      onChange={(e) => setSortOption(e.target.value)}
+      className="border-2 border-green-500 bg-white text-green-700 font-semibold px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-200"
+      >
+        <option value="">Sort By</option>
+        <option value="rating">Rating</option>
+        <option value="quantity">Quantity</option>
 
-      <input
-        type="text"
-        placeholder="Search by author"
-        className="input input-bordered w-full md:w-60"
-      />
+      </select>
+
     </div>
 
       {/* 🔄 changed: view toggle from button to dropdown */}

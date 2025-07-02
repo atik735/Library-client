@@ -15,7 +15,7 @@ const Footer = () => {
 	<li><NavLink to='/' className={({ isActive }) =>
           isActive
             ? "text-green-600 font-bold"
-            : "text-gray-500"
+            : "text-gray-500 "
         }
 >Home</NavLink></li>
 	<li><NavLink to='/allbooks' className={({ isActive }) =>
@@ -53,7 +53,7 @@ const Footer = () => {
     ease: "easeInOut",
   }}
   className='w-18' src={logo} alt="" />
-    <p className="font-bold">
+    <p className="font-bold text-black">
       BOOKNEST.
       </p>
       <p className='text-gray-700 py-4'>
@@ -62,7 +62,7 @@ Happy reading and keep exploring!
     </p>
   </aside>
     <nav>
-    <div className="grid grid-flow-col gap-4 ">
+    <div className="grid grid-flow-col gap-4 text-black">
       <Link className='hover:text-green-600' to={"https://www.facebook.com/ki.korbi.id.diye"}>
       <CiFacebook size={30}/>
       </Link>
@@ -89,7 +89,7 @@ Happy reading and keep exploring!
   </div>
     </div>
   </nav>
-      <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+      <p className='text-black'>Copyright © {new Date().getFullYear()} - All right reserved</p>
 </footer>
     );
 };

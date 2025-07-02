@@ -38,10 +38,11 @@ const BookCategories = () => {
 
 
     return (
-    <div className="bg-green-100 py-10 px-4 rounded-xl">
-      <h2 className="text-3xl font-bold text-center mb-10 border-b-2 border-green-500  px-4 place-self-center">
-        Book Categories
-      </h2>
+<div className="bg-green-100 dark:bg-gray-800 py-10 px-4 rounded-xl">
+  <h2 className="text-3xl font-bold text-center mb-10 border-b-2 border-green-500 dark:border-green-300 text-gray-900 dark:text-white px-4 place-self-center">
+    Book Categories
+  </h2>
+
 
       <Swiper
         slidesPerView={1}
@@ -70,8 +71,14 @@ const BookCategories = () => {
     ease: "easeInOut",
   }} className=' place-self-center group transition-all duration-300'>
     <Link to={`/category/${category.name.toLowerCase()}`}>
-      <img src={category.image} className='w-44 rounded-full h-44 p-1 border-2 border-dashed border-green-600 transition-transform duration-300 group-hover:scale-105' alt="" />
-      <p className='text-center font-bold text-lg mt-2 transition-transform duration-300'>{category.name}</p>
+  <img
+  src={category.image}
+  className="w-44 rounded-full h-44 p-1 border-2 border-dashed border-green-600 dark:border-green-400 transition-transform duration-300 group-hover:scale-105"
+/>
+<p className="text-center font-bold text-lg mt-2 text-gray-800 dark:text-gray-100 transition-transform duration-300">
+  {category.name}
+</p>
+
     </Link>
   </motion.div>
 </SwiperSlide>

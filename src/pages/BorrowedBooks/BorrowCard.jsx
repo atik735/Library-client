@@ -10,7 +10,7 @@ const BorrowCard = ({borrow,handleReturn}) => {
       inactiveFillColor: '#fbf1a9'
     }
     // console.log(borrow)
-    const {borrowedDate,category,image,returnDate,name,bookId,author,rating,quantity,_id} = borrow
+    const {category,image,returnDate,name,bookId,author,quantity,_id} = borrow
     return (
       <tr className='border-b border-opacity-20 text-gray-900 border-gray-300 bg-gray-50'>
        <td>

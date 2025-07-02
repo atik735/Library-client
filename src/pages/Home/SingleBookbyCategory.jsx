@@ -30,12 +30,12 @@ const SingleBookbyCategory = ({book}) => {
 
       {/* Book Info */}
       <div className="pt-3 space-y-1 ">
-        <p className=" text-gray-600 flex items-center gap-1">
+        <p className=" text-base flex items-center gap-1">
           <IoPerson />{book.author}
         </p>
 
         <div className="flex items-center justify-between">
-          <h3 className="text-md font-semibold text-gray-800">
+          <h3 className="text-md font-semibold text-base">
             {book.name}
           </h3>
 

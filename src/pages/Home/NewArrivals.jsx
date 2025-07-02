@@ -35,7 +35,7 @@ const NewArrivals = () => {
           {books.map((book) => (
             <div
               key={book._id}
-              className="bg-base-200 rounded-lg shadow-sm p-4 w-full max-w-xs mx-auto"
+              className="bg-base-200 dark:bg-gray-800 rounded-lg shadow-sm p-4 w-full max-w-xs mx-auto"
               data-aos="fade-up"
             >
               {/* Book Image & Badge */}
@@ -52,12 +52,12 @@ const NewArrivals = () => {
 
               {/* Book Info */}
               <div className="pt-3 space-y-1">
-                <p className="text-gray-600 flex items-center gap-1 text-sm">
+                <p className=" flex items-center gap-1 text-sm">
                   <IoPerson /> {book.author}
                 </p>
 
                 <div className="flex items-center justify-between">
-                  <h3 className="text-md font-semibold text-gray-800 dark:text-white">
+                  <h3 className="text-md font-semibold dark:text-white">
                     {book.name}
                   </h3>
                   <Rating
@@ -68,7 +68,7 @@ const NewArrivals = () => {
                     itemStyles={myStyles}
                   />
                 </div>
-                <p className="text-sm text-gray-500">Quantity: {book.quantity}</p>
+                <p className="text-sm">Quantity: {book.quantity}</p>
 
 
                 <Link to={`/details/${book._id}`}>

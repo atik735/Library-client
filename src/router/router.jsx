@@ -95,15 +95,15 @@ const router = createBrowserRouter([
         path: "contact",
         Component:About
       },
-      {
-        path: "register",
-        Component: Register,
-      },
-      {
-        path: "signIn",
-        Component: SignIn,
-      },
     ],
+  },
+  {
+    path: "register",
+    Component: Register,
+  },
+  {
+    path: "signIn",
+    Component: SignIn,
   },
 ]);
 

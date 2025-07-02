@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import register from "../../assets/register.json";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { updateProfile } from "firebase/auth";
@@ -9,7 +9,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../firebase/firebase.init";
 
 const Register = () => {
-  const { setUser, createUser, googleSignIn } = useContext(AuthContext);
+  const { setUser, createUser, googleSignIn,user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,7 +17,15 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+
+useEffect(() => {
+  if (!loading && user) {
+    navigate('/'); // or wherever you want
+  }
+}, [user, loading, navigate]);
+
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+  
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -84,19 +92,19 @@ const Register = () => {
 <div className="hero bg-base-200 min-h-screen py-6 px-2">
   <div className="hero-content flex-col lg:flex-row-reverse max-w-6xl mx-auto">
         <div className="text-center lg:text-left">
-          <Lottie
-            className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
-            animationData={register}
-            loop={true}
-          ></Lottie>
+    <Lottie
+  className="w-full max-w-lg h-auto sm:h-[350px] md:h-[400px]"
+  animationData={register}
+  loop={true}
+/>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto">
+        <div className="card bg-white w-full max-w-sm shrink-0 shadow-2xl mx-auto">
           <div className="card-body">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Register now!</h1>
+          <h1 className="text-3xl sm:text-4xl text-black md:text-5xl font-bold">Register now!</h1>
             <form onSubmit={handleSignUp} className="space-y-5">
               <div className="space-y-2">
                 <div>
-                  <label className="block mb-2 text-sm">Name</label>
+                  <label className="block mb-2 text-black text-sm">Name</label>
                   <input
                     type="text"
                     name="name"
@@ -107,7 +115,7 @@ const Register = () => {
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm">Photo URL</label>
+                  <label className="block mb-2 text-black text-sm">Photo URL</label>
                   <input
                     type="text"
                     name="photo"
@@ -118,7 +126,7 @@ const Register = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block mb-2 text-sm">
+                  <label htmlFor="email" className="block text-black mb-2 text-sm">
                     Email address
                   </label>
                   <input
@@ -132,7 +140,7 @@ const Register = () => {
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <label htmlFor="password" className="text-sm">
+                    <label htmlFor="password" className="text-black text-sm">
                       Password
                     </label>
                   </div>
@@ -152,9 +160,9 @@ const Register = () => {
                     >
                       {" "}
                       {showPassword ? (
-                        <FaEyeSlash></FaEyeSlash>
+                        <FaEyeSlash fill="black"></FaEyeSlash>
                       ) : (
-                        <FaEye></FaEye>
+                        <FaEye fill="black"></FaEye>
                       )}{" "}
                     </button>
                   </div>
@@ -170,7 +178,7 @@ const Register = () => {
                   >
                     Register
                   </button>
-                  <h3 className="text-center font-bold text-lg py-2">Or</h3>
+                  <h3 className="text-center font-bold text-black text-lg py-2">Or</h3>
                   {/* Google */}
                   <button
                     onClick={handleGoogleSignIn}
@@ -215,6 +223,9 @@ const Register = () => {
                 </p>
               </div>
             </form>
+            <Link to="/" className="btn">
+              ← Back Home
+            </Link>
           </div>
         </div>
       </div>

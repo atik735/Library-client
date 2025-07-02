@@ -37,7 +37,7 @@ const BooksDetails = () => {
 
     <div className="flex-1 space-y-3">
       <div>
-        <h2 className="text-3xl font-bold">{name}</h2>
+        <h2 className="text-3xl text-gray-700 font-bold">{name}</h2>
         <p className="text-gray-400 text-sm">by: {author}</p>
       </div>
 
@@ -51,7 +51,7 @@ const BooksDetails = () => {
 
       <div className="flex flex-col space-y-1">
         <p className="font-semibold text-gray-700">Category: {category}</p>
-        <p className="text-lg font-medium">Quantity: {quantity}</p>
+        <p className="text-lg text-gray-700 font-medium">Quantity: {quantity}</p>
       </div>
 
       <hr className="border border-gray-200" />

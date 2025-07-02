@@ -44,7 +44,7 @@ const Extra2 = () => {
           Books Store
         </h2>
 
-        <p className="text-base text-gray-600">
+        <p className="text-base">
           BookNest is a modern and user-friendly online library platform designed to connect readers with a vast collection of books across various genres. Whether you're a casual reader, a student, or a passionate book lover, BookNest provides a seamless experience for discovering, borrowing, and managing books with ease. With its intuitive design, categorized listings, and detailed book pages, users can explore authors, ratings, and availability at a glance. BookNest aims to make reading more accessible, organized, and enjoyable for everyone. It also offers features like personalized recommendations, book reviews, and a secure user dashboard for tracking borrowed books. With a focus on community and convenience, BookNest encourages a love for reading among all age groups.
         </p>
 

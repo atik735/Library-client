@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Lottie from "lottie-react";
 import signin from "../../assets/signin.json";
 import { useContext, useRef, useState } from "react";
@@ -11,7 +11,7 @@ import { auth } from "../../firebase/firebase.init";
 
 
 const SignIn = () => {
-  const {signInUser,googleSignIn} = useContext(AuthContext)
+  const {signInUser,googleSignIn,user,loading} = useContext(AuthContext)
   const navigate =useNavigate()
   const location = useLocation()
   // console.log(location)
@@ -20,6 +20,12 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/'); // or wherever you want
+    }
+  }, [user, loading, navigate]);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -91,13 +97,13 @@ const SignIn = () => {
             loop={true}
           ></Lottie>
         </div>
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto">
+    <div className="card bg-white w-full max-w-sm shrink-0 shadow-2xl mx-auto">
           <div className="card-body">
-<h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">Sign in now!</h1>
+<h1 className="text-2xl sm:text-3xl md:text-4xl text-black font-bold mb-2">Sign in now!</h1>
             <form onSubmit={handleSignIn} className="space-y-4">
               <div className="space-y-2">
                 <div>
-                  <label htmlFor="email" className="block mb-2 text-sm">
+                  <label htmlFor="email" className="block text-black mb-2 text-sm">
                     Email address
                   </label>
                   <input
@@ -112,7 +118,7 @@ const SignIn = () => {
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <label htmlFor="password" className="text-sm">
+                    <label htmlFor="password" className="text-sm text-black">
                       Password
                     </label>
                     <div onClick={handleReset}>
@@ -140,9 +146,9 @@ const SignIn = () => {
                     >
                       {" "}
                       {showPassword ? (
-                        <FaEyeSlash></FaEyeSlash>
+                        <FaEyeSlash fill="black"></FaEyeSlash>
                       ) : (
-                        <FaEye></FaEye>
+                        <FaEye fill="black"></FaEye>
                       )}{" "}
                     </button>
                   </div>
@@ -158,7 +164,7 @@ const SignIn = () => {
                   >
                     Sign in
                   </button>
-                  <h3 className="text-center font-bold text-lg py-2">Or</h3>
+                  <h3 className="text-center font-bold text-black text-lg py-2">Or</h3>
                   {/* Google */}
                   <button
                     onClick={handleGoogleSignIn}
@@ -203,6 +209,9 @@ const SignIn = () => {
                 </p>
               </div>
             </form>
+<Link to="/" className="btn">
+  ← Back Home
+</Link>
           </div>
         </div>
       </div>
