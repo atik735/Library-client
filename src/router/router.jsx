@@ -12,6 +12,7 @@ import axios from "axios";
 import UpdateBooks from "../pages/AllBooks/UpdateBooks";
 import CategoriesBooks from "../pages/Home/CategoriesBooks";
 import BooksDetails from "../pages/Details&Brow/BooksDetails";
+import About from "../pages/About/About";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
         element: (
             <CategoriesBooks></CategoriesBooks>
         ),
+      },
+      {
+        path: "contact",
+        Component:About
       },
       {
         path: "register",
