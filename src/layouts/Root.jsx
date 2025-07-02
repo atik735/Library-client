@@ -7,9 +7,7 @@ const Root = () => {
   const navigation = useNavigation();
   return (
     <div>
-      <header>
         <Navbar></Navbar>
-      </header>
       <main className="min-h-[calc(100vh-116px)]">
         <div className="w-11/12 mx-auto mt-5 ">
           {navigation.state == "loading" ? (
@@ -21,9 +19,7 @@ const Root = () => {
           )}
         </div>
       </main>
-      <footer>
         <Footer></Footer>
-      </footer>
     </div>
   );
 };
