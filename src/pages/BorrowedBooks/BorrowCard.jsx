@@ -12,48 +12,35 @@ const BorrowCard = ({borrow,handleReturn}) => {
     // console.log(borrow)
     const {borrowedDate,category,image,returnDate,name,bookId,author,rating,quantity,_id} = borrow
     return (
-  <div className="bg-base-200 rounded-lg shadow-sm  p-4 w-full max-w-xs mx-auto">
-      <figure className="relative  px-4">
-        {/* Book Image */}
-        <img
-          src={image}
-          alt={name}
-          className="w-full h-48 rounded-md"
-        />
-
-        {/* Category Badge */}
-        <span className="absolute top-2 left-2 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded shadow">
-          {category}
-        </span>
-      </figure>
-
-      {/* Book Info */}
-      <div className="pt-3 space-y-1 ">
-        <p className=" text-gray-600 flex items-center gap-1">
-          <IoPerson />{author}
-        </p>
-
-        <div className="flex items-center justify-between">
-          <h3 className="text-md font-semibold text-gray-800">
-            {name}
-          </h3>
-
-          <Rating
-            style={{ maxWidth: 80 }}
-            value={parseFloat(rating)}
-            readOnly
-            halfFillMode="svg"
-            itemStyles={myStyles}
-          />
-        </div>
-        <p>Quantity: {quantity}</p>
-        <p>Borrowed Date: {borrowedDate}</p>
-        <p>Return Date: {returnDate}</p>
+      <tr className='border-b border-opacity-20 text-gray-900 border-gray-300 bg-gray-50'>
+       <td>
+          <div className="flex items-center gap-3">
+            <div className="avatar">
+              <div className="mask mask-squircle h-12 w-12">
+                <img
+                  src={image}
+                  alt={name} />
+              </div>
+            </div>
+            <div>
+              <div className="font-bold">{name}</div>
+              <div className="text-sm opacity-50">by {author}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p>{category}</p>
+        </td>
+        <td>
+          <p>{quantity}</p>
+        </td>
+        <td className='max-sm:text-center'>{returnDate}</td>
+        <th className='flex '>
         <button onClick={() =>handleReturn(_id,bookId)} className="btn btn-sm mt-2 w-full text-white bg-green-600 hover:bg-green-700 font-medium">
           Return Book
-        </button>        
-      </div>
-    </div>
+        </button>  
+        </th>
+      </tr>
     );
 };
 

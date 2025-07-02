@@ -65,21 +65,39 @@ const handleReturn = (_id, bookId) => {
 
 
     return (
-        <div className='mb-5'>
-            <title>BookNest||BorrowedBooks</title>
+    <div className="mb-10">
+      <h2 className="text-center text-2xl text-green-600 font-bold my-5">Borrowed Books</h2>
+
       {loading ? (
-        <div className="text-center text-green-500 text-2xl p-5 mt-10">
-<span className="loading loading-bars loading-xl"></span>
-        </div>
-      ) : borrows.length === 0 ? (
-        <div className="text-center text-green-500 text-3xl bg-green-50 p-5 font-bold mt-10">
-          You haven't borrowed any books yet.
+        <div className="flex justify-center my-10">
+          <span className="loading loading-bars loading-xl text-green-500"></span>
         </div>
       ) : (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-          {borrows.map(borrow => (
-            <BorrowCard key={borrow._id} borrow={borrow} handleReturn={handleReturn}></BorrowCard>
-          ))}
+        <div className="overflow-x-auto md:w-10/12 mx-auto">
+          <table className="table min-w-full text-xs">
+            <thead>
+              <tr className="text-green-600 bg-green-100 border-b-green-400">
+                <th>Books</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Return Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {borrows.length > 0 ? (
+                borrows.map((borrow) => (
+                  <BorrowCard key={borrow._id} borrow={borrow} handleReturn={handleReturn} />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center text-xl py-6 text-gray-500 italic">
+                    You haven’t borrowed any books yet. Start exploring and borrow your first one! 📚
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
