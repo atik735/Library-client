@@ -1,5 +1,5 @@
 # 📚 BookNest - Library Management System
-
+**OverView**  
 **BookNest** is a full-featured web application designed for managing a digital library. Users can browse books by category, borrow and return them, and view detailed information. Admins (if implemented) can manage books and categories. Built using **React**, **Firebase**, and modern UI tools, the system ensures seamless navigation, responsive design, and secure user access.
 
 ---
@@ -54,3 +54,15 @@ The purpose of this project is to build a complete **full-stack library manageme
 | `tailwindcss`             | Utility-first CSS framework for modern responsive design  |
 
 ---
+## 🛠️ How to Run Locally
+
+Follow these steps to run the project on your local machine:
+
+### 📦 Clone the Repository
+
+```bash
+git clone https://github.com/atik735/library-management-client.git
+
+cd library-management-server
+npm install
+npm run start
