@@ -48,7 +48,7 @@ const AllBooksCard = ({book}) => {
             readOnly
             halfFillMode="svg"
             itemStyles={myStyles}
-          />
+          /> 
         </div>
         <p>Quantity: {book.quantity}</p>
         <div className={`${user && user.email === book.email ? 'flex gap-2 place-self-center': ''}`}>
