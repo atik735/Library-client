@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const bannerSlides = [
-// https://i.ibb.co/Pzsd5Pvf/pepolereading.jpg
+// https://i.ibb.co/Pzsd5Pvf/pepolereading.jpg 
   {
     id: 1,
     title: "Explore a World of Books",
