@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Rating,ThinStar  } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import { Link } from 'react-router';
 import { IoPerson } from 'react-icons/io5';
+import { FaPen } from 'react-icons/fa';
+import { FcViewDetails } from 'react-icons/fc';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const myStyles = {
   itemShapes: ThinStar,
@@ -11,6 +14,7 @@ const myStyles = {
 }
 
 const AllBooksTable = ({book,index}) => {
+  const {user} = useContext(AuthContext)
     return (
       <tr>
         <th>
@@ -48,12 +52,21 @@ const AllBooksTable = ({book,index}) => {
           />        
         </td>
         <td>{book.category}</td>
+        <div className='flex w-full'>
         <th>
-                    <Link to={`/updateBook/${book._id}`}>
+  {user && user.email === book.email ? <Link to={`/updateBook/${book._id}`}>
         <button className="btn btn-sm mt-2 w-full text-white bg-green-600 hover:bg-green-700 font-medium">
-          Update ✏️
+          Update <FaPen className="ml-1" size={14} />
         </button>        
-        </Link>        </th>
+        </Link> : null}
+        </th>
+        <th>
+          <Link to={`/details/${book._id}`}>
+        <button className="btn btn-sm mt-2 w-full text-white bg-green-600 hover:bg-green-700 font-medium">
+          Details <FcViewDetails></FcViewDetails>
+        </button>        
+        </Link></th>
+        </div>
       </tr>
     );
 };
