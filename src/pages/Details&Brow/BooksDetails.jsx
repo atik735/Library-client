@@ -12,7 +12,7 @@ const BooksDetails = () => {
   itemShapes: ThinStar,
   activeFillColor: '#ffb700',
   inactiveFillColor: '#fbf1a9'
-}
+} 
     const {name,author,category,content,description,email,image,quantity,rating} =bookData
   
     const handleQuantityUpdate = () =>{
