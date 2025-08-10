@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Rating,ThinStar  } from '@smastrom/react-rating'
 import { IoPerson } from "react-icons/io5";
 import '@smastrom/react-rating/style.css'
 import { Link } from 'react-router';
 import { FaPen } from 'react-icons/fa6';
+import { FcViewDetails } from 'react-icons/fc';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const myStyles = {
   itemShapes: ThinStar,
@@ -11,6 +13,7 @@ const myStyles = {
   inactiveFillColor: '#fbf1a9'
 }
 const AllBooksCard = ({book}) => {
+  const {user} = useContext(AuthContext)
     // console.log(book)
     return (
    <div className="bg-base-200 rounded-lg shadow-sm  p-4 w-full max-w-xs mx-auto">
@@ -48,11 +51,20 @@ const AllBooksCard = ({book}) => {
           />
         </div>
         <p>Quantity: {book.quantity}</p>
-        <Link to={`/updateBook/${book._id}`}>
+        <div className={`${user && user.email === book.email ? 'flex gap-2 place-self-center': ''}`}>
+  {user && user.email === book.email ? <Link to={`/updateBook/${book._id}`}>
         <button className="btn btn-sm mt-2 w-full text-white bg-green-600 hover:bg-green-700 font-medium">
           Update <FaPen className="ml-1" size={14} />
         </button>        
-        </Link>
+        </Link> : null}
+
+     <Link to={`/details/${book._id}`} >
+         <button className="btn btn-sm mt-2 w-full text-white bg-green-600 hover:bg-green-700 font-medium">
+                  Details <FcViewDetails size={15} />
+        </button>        
+         </Link>
+          </div>
+
       </div>
     </div>
     );
