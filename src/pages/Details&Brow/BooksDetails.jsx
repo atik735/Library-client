@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import BorrowModal from './BorrowModal';
 const BooksDetails = () => {
     const {data:book} =useLoaderData()
-    const {user} = useContext(AuthContext)
+    const {user,loading} = useContext(AuthContext)
     const [bookData,setBookData] = useState(book)
     const myStyles = {
   itemShapes: ThinStar,
@@ -20,6 +20,13 @@ const BooksDetails = () => {
         ...prev, quantity: prev.quantity -1 
       }))
     }
+      if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[70vh]">
+        <span className="loading loading-spinner loading-lg text-green-600"></span>
+      </div>
+    );
+  }
 
 
   return (
@@ -68,12 +75,16 @@ const BooksDetails = () => {
     </div>
   </div>
     </div>
+
   <div className='text-center mt-5'>
         <button className='w-7/12 text-white bg-green-600 hover:bg-green-700 btn' onClick={()=>document.getElementById('my_modal_4').showModal()} disabled={quantity === 0}>Borrow Book</button>
 
     <dialog id="my_modal_4" className="modal">
   <div className="modal-box w-11/12 max-w-5xl">
-        <BorrowModal book={bookData} handleQuantityUpdate={handleQuantityUpdate} user={user} onClose = {() => document.getElementById('my_modal_4').close()}></BorrowModal>
+      
+      {user?  <BorrowModal book={bookData} handleQuantityUpdate={handleQuantityUpdate} user={user} onClose = {() => document.getElementById('my_modal_4').close()}></BorrowModal> :
+      <p className="text-center text-red-500">You must login to borrow this book.</p>
+}
     <div className="modal-action">
       <form method="dialog">
         {/* if there is a button, it will close the modal */}

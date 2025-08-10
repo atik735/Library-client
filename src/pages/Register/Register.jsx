@@ -20,7 +20,7 @@ const Register = () => {
 
 useEffect(() => {
   if (!loading && user) {
-    navigate('/'); // or wherever you want
+    navigate('/'); // or 
   }
 }, [user, loading, navigate]);
 

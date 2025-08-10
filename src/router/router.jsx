@@ -57,9 +57,7 @@ const router = createBrowserRouter([
         </div>
   ),
   element: (
-    <PrivateRoute>
       <BooksDetails></BooksDetails>
-    </PrivateRoute>
   ),
 },
       {
