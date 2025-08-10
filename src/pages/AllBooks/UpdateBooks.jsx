@@ -177,7 +177,7 @@ const UpdateBooks = () => {
           ></textarea>
         </fieldset>
 
-        <input type="submit" className="btn bg-green-600 w-full" value="Update Book" />
+        <input type="submit" className="btn bg-green-600 w-full text-white" value="Update Book" />
       </form>
     </div>
   );
